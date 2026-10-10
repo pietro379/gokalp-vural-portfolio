@@ -35,7 +35,7 @@ const works = [
     glow: 'hover:shadow-emerald-500/50',
     gradient: 'from-emerald-400 to-cyan-500',
     image: '/works/image-compressor.png',
-    link: 'https://pietro379.github.io/gorsel-sikistirici/',
+    link: 'https://pietro379.github.io/image-compressor/',
   },
   {
     title: 'Cozy Focus Timer',
