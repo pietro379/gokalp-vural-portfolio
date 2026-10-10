@@ -1,0 +1,97 @@
+﻿@import "tailwindcss";
+
+/* Açık/koyu tema: <html> üzerindeki "dark" sınıfıyla çalışır */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --animate-drift-a: drift-a 45s ease-in-out infinite;
+  --animate-drift-b: drift-b 55s ease-in-out infinite;
+  --animate-drift-c: drift-c 50s ease-in-out infinite;
+  --animate-drift-d: drift-d 60s ease-in-out infinite;
+  --animate-gradient: gradient 8s ease infinite;
+}
+
+/* Balonlar yavaşça yukarı-aşağı ve yanlara süzülüp yer değiştirir */
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(18vw, 30vh) scale(1.1); }
+  66% { transform: translate(6vw, 65vh) scale(0.95); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25vw, -20vh) scale(0.95); }
+  66% { transform: translate(-10vw, 35vh) scale(1.12); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(25vw, -40vh) scale(1.1); }
+  66% { transform: translate(-20vw, -15vh) scale(0.95); }
+}
+@keyframes drift-d {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(35vw, -30vh) scale(1.15); }
+  66% { transform: translate(-15vw, 25vh) scale(0.9); }
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font-sans); }
+
+/* Hareketi azaltmayı seçen kullanıcılar için animasyonları kapat */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+
+
+
+/* Kart Cüzdanı önizlemesi animasyonları */
+@keyframes wallet-a {
+  0%, 100% { transform: translate(0, 0) scale(0.88) rotate(0); }
+  35%, 65% { transform: translate(-42%, -10px) scale(0.9) rotate(-12deg); }
+}
+@keyframes wallet-b {
+  0%, 100% { transform: translate(0, 22px) scale(0.94) rotate(0); }
+  35%, 65% { transform: translate(40%, 4px) scale(0.95) rotate(11deg); }
+}
+@keyframes wallet-c {
+  0%, 100% { transform: translateY(46px); }
+  35%, 65% { transform: translateY(36px) scale(1.04); }
+}
+@keyframes wallet-shine {
+  0%, 30% { transform: translateX(-150%) skewX(-12deg); }
+  70%, 100% { transform: translateX(450%) skewX(-12deg); }
+}
+@keyframes wallet-chip {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes wallet-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes wallet-twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+@keyframes wallet-pin {
+  0%, 15% { opacity: 0.25; transform: scale(0.8); }
+  30%, 70% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.25; transform: scale(0.8); }
+}
+
+@theme {
+  --animate-wallet-a: wallet-a 6s ease-in-out infinite;
+  --animate-wallet-b: wallet-b 6s ease-in-out infinite;
+  --animate-wallet-c: wallet-c 6s ease-in-out infinite;
+  --animate-wallet-shine: wallet-shine 3.5s ease-in-out infinite;
+  --animate-wallet-chip: wallet-chip 4s ease-in-out infinite;
+  --animate-wallet-pulse: wallet-pulse 4s ease-in-out infinite;
+  --animate-wallet-twinkle: wallet-twinkle 2.5s ease-in-out infinite;
+  --animate-wallet-pin: wallet-pin 2.1s ease-in-out infinite;
+}
