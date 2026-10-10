@@ -29,12 +29,12 @@ const works = [
     link: 'https://pietro379.github.io/add-to-cart-project/',
   },
   {
-    title: 'Görsel Sıkıştırıcı',
+    title: 'Image Compressor',
     tag: 'HTML • Tailwind • JS',
     text: 'JPEG, PNG ve WebP görselleri tarayıcıda sıkıştırır; hiçbir dosya sunucuya yüklenmez.',
     glow: 'hover:shadow-emerald-500/50',
     gradient: 'from-emerald-400 to-cyan-500',
-    image: '/works/gorsel-sikistirici.png',
+    image: '/works/image-compressor.png',
     link: 'https://pietro379.github.io/gorsel-sikistirici/',
   },
   {

@@ -1,6 +1,8 @@
 ﻿import { useEffect, useState } from 'react'
 
 const USERNAME = 'pietro379'
+// Sitenin kendi reposu listede gösterilmez
+const HIDDEN_REPO = 'gokalp-vural-portfolio'
 
 // Dile göre neon nokta rengi
 const langColors = {
@@ -33,7 +35,7 @@ export default function OpenSource() {
       })
       .then((data) => {
         const list = data
-          .filter((r) => !r.fork && !r.private)
+          .filter((r) => !r.fork && !r.private && r.name !== HIDDEN_REPO)
           .sort(
             (a, b) =>
               b.stargazers_count - a.stargazers_count ||
