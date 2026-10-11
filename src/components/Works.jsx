@@ -45,7 +45,17 @@ const works = [
     gradient: 'from-amber-400 to-orange-600',
     image: '/works/odaklanma.png',
     link: 'https://pietro379.github.io/cozy-focus-timer/',
-    span: 'sm:col-span-4',
+    span: 'sm:col-span-2',
+  },
+  {
+    title: 'Photobooth',
+    tag: 'JavaScript • Canvas • 29 kamera',
+    text: 'Fotoğrafını 29 retro kameradan birinde çekilmiş gibi göster, fotoğraf kabini şeritleri ve polaroidlerle kolaj yap. Flaş patlar, PDF, GIF ya da PNG olarak indirirsin.',
+    glow: 'hover:shadow-rose-500/50',
+    gradient: 'from-rose-500 to-red-600',
+    image: '/works/photobooth.png',
+    link: 'https://pietro379.github.io/retro-photo-booth/',
+    span: 'sm:col-span-2',
   },
 ]
 
