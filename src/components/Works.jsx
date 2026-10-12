@@ -11,6 +11,16 @@ const works = [
     span: 'sm:col-span-2 sm:row-span-2',
   },
   {
+    title: 'Pet Care',
+    tag: 'Flutter • Dart • Material 3',
+    text: 'Evcil hayvanlar için sağlık takibi ve sosyal ağ uygulaması: veteriner geçmişi, akış ve sohbet, kategorili klinik haritası, açık/koyu tema.',
+    glow: 'hover:shadow-violet-500/50',
+    gradient: 'from-indigo-500 via-violet-500 to-fuchsia-500',
+    image: '/works/pet-care.webp',
+    link: 'https://github.com/pietro379/pet-care-app',
+    span: 'sm:col-span-2 sm:row-span-2',
+  },
+  {
     title: 'GameY',
     tag: 'JavaScript • 12 oyun',
     text: 'Saf JavaScript ile yazılmış 12 retro oyunu tek çatıda toplayan oyun portalı.',
