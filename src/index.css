@@ -42,9 +42,26 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--font-sans); }
 
+/* Açık kaynak şeridi: sağdan sola kesintisiz kayar, üzerine gelince durur */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { padding: 1rem 0 1.5rem; }
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
+
 /* Hareketi azaltmayı seçen kullanıcılar için animasyonları kapat */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  /* Şerit kaymadığı için kartlar yatay kaydırılarak gezilir; kopya kartlar gizlenir */
+  .marquee { overflow-x: auto; }
+  .marquee-track > [aria-hidden="true"] { display: none; }
 }
 
 
