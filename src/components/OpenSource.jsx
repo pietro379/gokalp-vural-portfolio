@@ -1,8 +1,18 @@
 import { useEffect, useState } from 'react'
 
 const USERNAME = 'pietro379'
-// Her repo kartının kayan şeritte ekranda kalma süresi (saniye); sayı arttıkça şerit yavaşlar
-const SECONDS_PER_REPO = 15
+const ROW_COUNT = 3
+// Bir kartın şeritte kapladığı süre (saniye); sayı arttıkça şerit yavaşlar
+const SECONDS_PER_CARD = 14
+// Bir satırın tek turunda en az bu kadar kart olur (geniş ekranları boş bırakmamak için)
+const MIN_CARDS_PER_SET = 8
+
+// Repoları sırayla satırlara dağıtır: 8 repo, 3 satırda 3-3-2 olur
+function splitIntoRows(items, rowCount) {
+  return Array.from({ length: rowCount }, (_, row) => items.filter((_, i) => i % rowCount === row)).filter(
+    (row) => row.length > 0,
+  )
+}
 
 // Dile göre neon nokta rengi
 const langColors = {
@@ -30,7 +40,7 @@ function RepoCard({ repo, hidden = false }) {
       // Şeritteki ikinci kopya ekran okuyuculardan ve klavye odağından gizlenir
       aria-hidden={hidden || undefined}
       tabIndex={hidden ? -1 : undefined}
-      className="group relative mr-6 flex h-48 w-72 shrink-0 flex-col rounded-3xl border border-white/50 bg-white/50 p-6 shadow-xl backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-white/5 sm:w-80"
+      className="group relative mr-6 mb-6 flex h-44 w-72 shrink-0 flex-col rounded-3xl border border-white/50 bg-white/50 p-6 shadow-xl backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-white/5 sm:w-80"
     >
       {/* Köşede yanan neon nokta */}
       <span
@@ -107,23 +117,35 @@ export default function OpenSource() {
       {!repos && !error && (
         <div className="mt-14 flex gap-6 px-6">
           {Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className="h-48 w-72 shrink-0 animate-pulse rounded-3xl bg-white/40 dark:bg-white/5 sm:w-80" />
+            <div key={i} className="h-44 w-72 shrink-0 animate-pulse rounded-3xl bg-white/40 dark:bg-white/5 sm:w-80" />
           ))}
         </div>
       )}
 
       {repos && (
         // Kenarlarda kartlar yumuşakça belirip kaybolur
-        <div className="marquee mt-14 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-          {/* İçerik iki kez yazılır; şerit tam yarısı kadar kayıp başa sararak kesintisiz döner */}
-          <div className="marquee-track" style={{ animationDuration: `${repos.length * SECONDS_PER_REPO}s` }}>
-            {repos.map((r) => (
-              <RepoCard key={r.id} repo={r} />
-            ))}
-            {repos.map((r) => (
-              <RepoCard key={`${r.id}-copy`} repo={r} hidden />
-            ))}
-          </div>
+        <div className="marquee mt-14 flex flex-col [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          {splitIntoRows(repos, ROW_COUNT).map((row, rowIndex) => {
+            // Az repolu satır geniş ekranı doldurmak için tekrarlanır; sonra ikiye katlanıp kesintisiz döner
+            const set = []
+            while (set.length < MIN_CARDS_PER_SET) set.push(...row)
+            const track = [...set, ...set]
+            return (
+              <div
+                key={rowIndex}
+                className="marquee-track"
+                style={{
+                  animationDuration: `${set.length * SECONDS_PER_CARD}s`,
+                  // Satırlar farklı noktalardan başlar, alt alta aynı karta denk gelmez
+                  animationDelay: `-${rowIndex * SECONDS_PER_CARD * 2.5}s`,
+                }}
+              >
+                {track.map((r, i) => (
+                  <RepoCard key={`${r.id}-${i}`} repo={r} hidden={i >= row.length} />
+                ))}
+              </div>
+            )
+          })}
         </div>
       )}
     </section>

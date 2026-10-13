@@ -47,7 +47,7 @@ body { margin: 0; font-family: var(--font-sans); }
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.marquee { padding: 1rem 0 1.5rem; }
+.marquee { padding: 1rem 0 0; }
 .marquee-track {
   display: flex;
   width: max-content;
