@@ -98,7 +98,7 @@ export default function OpenSource() {
   }, [])
 
   return (
-    <section id="acik-kaynak" className="overflow-hidden py-24">
+    <section id="acik-kaynak" className="overflow-hidden py-16 sm:py-24">
       <h2 className="px-6 text-center text-4xl font-black tracking-tight sm:text-6xl">
         <span className="text-emerald-500 dark:text-emerald-400">
           Açık Kaynak Projelerim

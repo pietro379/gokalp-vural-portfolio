@@ -27,7 +27,7 @@
 
 export default function About() {
   return (
-    <section id="hakkimda" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="hakkimda" className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
       <h2 className="text-center text-4xl font-black tracking-tight sm:text-6xl">
         <span className="text-cyan-500 dark:text-cyan-400">
           Hakkımda
@@ -39,11 +39,11 @@ export default function About() {
         hareket ediyorsa ya da bir şey sorunu çözüyorsa, büyük ihtimalle ilgimi çeker. ⚡
       </p>
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2">
+      <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6">
         {skills.map((s) => (
           <article
             key={s.title}
-            className="group rounded-3xl border border-white/50 bg-white/50 p-8 shadow-xl backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-white/5"
+            className="group rounded-3xl border border-white/50 bg-white/50 p-6 shadow-xl sm:p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-white/5"
           >
             <div
               className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-3xl shadow-lg transition group-hover:rotate-6 group-hover:scale-110`}

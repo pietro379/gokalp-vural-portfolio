@@ -74,6 +74,7 @@ const works = [
     glow: 'hover:shadow-yellow-500/50',
     gradient: 'from-yellow-400 to-blue-600',
     image: '/works/tidyfiles.png',
+    mobileImage: '/works/tidyfiles-mobile.png',
     link: 'https://github.com/pietro379/tidyfiles',
     span: 'sm:col-span-4',
   },
@@ -125,7 +126,7 @@ function CardStackPreview() {
         <span key={l + t} className="animate-wallet-twinkle absolute h-1.5 w-1.5 rounded-full bg-white" style={{ left: l, top: t, animationDelay: d }} />
       ))}
 
-      <div className="absolute inset-x-0 top-12 h-48 sm:top-20">
+      <div className="absolute inset-x-0 top-8 h-48 origin-top scale-[0.78] sm:top-20 sm:scale-100">
         <MiniCard
           className="bg-gradient-to-br from-rose-500 to-orange-400"
           anim="animate-wallet-a"
@@ -166,12 +167,16 @@ function Card({ w }) {
       className={`group relative block min-h-64 overflow-hidden rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl transition duration-500 hover:z-10 hover:scale-[1.03] hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
     >
       {w.image ? (
-        <img
-          src={w.image}
-          alt={w.title}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 group-hover:scale-110"
-        />
+        // Geniş kapaklar telefonda yanlardan kırpılır; mobileImage varsa dar ekranda o kullanılır
+        <picture>
+          {w.mobileImage && <source media="(max-width: 639px)" srcSet={w.mobileImage} />}
+          <img
+            src={w.image}
+            alt={w.title}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 group-hover:scale-110"
+          />
+        </picture>
       ) : (
         <div className={`absolute inset-0 bg-gradient-to-br ${w.gradient}`}>
           <CardStackPreview />
@@ -197,7 +202,7 @@ function Card({ w }) {
 
 export default function Works() {
   return (
-    <section id="calismalar" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="calismalar" className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
       <h2 className="text-center text-4xl font-black tracking-tight sm:text-6xl">
         <span className="text-fuchsia-500 dark:text-fuchsia-400">
           Seçili Çalışmalarım
@@ -207,7 +212,7 @@ export default function Works() {
         Detaylar için kartların üzerine gel ya da dokun.
       </p>
 
-      <div className="mt-14 grid auto-rows-[18rem] gap-5 sm:grid-cols-4">
+      <div className="mt-10 grid auto-rows-[18rem] gap-5 sm:grid-cols-4">
         {works.map((w) => (
           <Card key={w.title} w={w} />
         ))}

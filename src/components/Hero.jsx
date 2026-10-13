@@ -1,6 +1,6 @@
 ﻿export default function Hero() {
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    <section className="flex min-h-svh flex-col items-center justify-center px-6 text-center">
       <div className="rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-semibold shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-white/10">
         <span className="mr-2">👋</span>
         Merhaba
