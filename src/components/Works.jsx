@@ -67,6 +67,16 @@ const works = [
     link: 'https://pietro379.github.io/retro-photo-booth/',
     span: 'sm:col-span-2',
   },
+  {
+    title: 'tidyfiles',
+    tag: 'Python • CLI • Birim Testleri',
+    text: 'Karışık klasörleri dosya türüne ve tarihe göre düzenleyen komut satırı aracı. Kuru çalıştırma ve tek komutla geri alma destekler.',
+    glow: 'hover:shadow-yellow-500/50',
+    gradient: 'from-yellow-400 to-blue-600',
+    image: '/works/tidyfiles.png',
+    link: 'https://github.com/pietro379/tidyfiles',
+    span: 'sm:col-span-4',
+  },
 ]
 
 // Kart Cüzdanı için CSS ile çizilmiş canlı ön gösterim:
