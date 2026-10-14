@@ -79,6 +79,17 @@ const works = [
     link: 'https://github.com/pietro379/tidyfiles',
     span: 'sm:col-span-4',
   },
+  {
+    title: 'Taskboard',
+    tag: 'React • Node.js • PostgreSQL • 32 Test',
+    text: 'Takımlar için görev yönetimi: rollü çalışma alanları, sürükle-bırak pano, yorumlar ve etkinlik geçmişi. Express REST API, JWT, otomatik testler ve CI ile Vercel üzerinde yayında.',
+    glow: 'hover:shadow-indigo-500/50',
+    gradient: 'from-indigo-500 to-sky-500',
+    image: '/works/taskboard.png',
+    lightCover: true,
+    link: 'https://taskboard-app-red.vercel.app',
+    span: 'sm:col-span-4',
+  },
 ]
 
 // Kart Cüzdanı için CSS ile çizilmiş canlı ön gösterim:
@@ -185,7 +196,8 @@ function Card({ w }) {
       )}
       {/* Renkli parlama katmanı */}
       <div className={`absolute inset-0 bg-gradient-to-br ${w.gradient} opacity-0 mix-blend-soft-light transition duration-500 group-hover:opacity-80`} />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+      {/* Açık renkli kapaklarda başlığın okunması için örtü daha koyu tutulur */}
+      <div className={`absolute inset-0 bg-gradient-to-t ${w.lightCover ? 'from-black/95 via-black/60 to-black/10' : 'from-black/85 via-black/30 to-transparent'}`} />
 
       <div className="absolute inset-x-0 bottom-0 p-6 text-white">
         <h3 className="text-2xl font-black sm:text-3xl">{w.title}</h3>
