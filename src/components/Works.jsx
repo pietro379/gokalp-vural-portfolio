@@ -21,12 +21,13 @@ const works = [
     span: 'sm:col-span-2 sm:row-span-2',
   },
   {
-    title: 'GameY',
+    title: 'RetroGames',
     tag: 'JavaScript • 12 oyun',
     text: 'Saf JavaScript ile yazılmış 12 retro oyunu tek çatıda toplayan oyun portalı.',
     glow: 'hover:shadow-fuchsia-500/50',
     gradient: 'from-fuchsia-500 to-rose-500',
-    image: '/works/gamey.jpg',
+    image: '/works/retrogames.png',
+    link: 'https://pietro379.github.io/retrogames/',
     span: 'sm:col-span-2',
   },
   {
