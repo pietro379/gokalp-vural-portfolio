@@ -27,7 +27,7 @@ const works = [
     glow: 'hover:shadow-fuchsia-500/50',
     gradient: 'from-fuchsia-500 to-rose-500',
     image: '/works/retrogames.png',
-    link: 'https://pietro379.github.io/retrogames/',
+    link: 'https://pietro379.github.io/game-website/',
     span: 'sm:col-span-2',
   },
   {
