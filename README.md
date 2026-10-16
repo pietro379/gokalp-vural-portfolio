@@ -1,12 +1,13 @@
 # Gökalp Vural | Portfolyo
 
 Ankara'da yaşayan junior yazılım geliştirici Gökalp Vural'ın kişisel portfolyo sitesi.
-Önceki görünüm `v1-archive` etiketinde saklanıyor.
+İçerik yenilenmeden önceki hâli `v1-archive` etiketinde saklanıyor.
 
 ## Özellikler
 
+- **Tema:** Süzülen renkli arka plan balonları, cam efektli kartlar, gradyanlı başlık
 - **Hero:** Harf harf yazılan kod penceresi animasyonu, kademeli sayfa açılışı, CV indirme düğmesi
-- **Hakkımda:** Renk kodlu beceri etiketleri ve kısa istatistikler
+- **Hakkımda:** Yazılım odaklı biyografi, kısa istatistikler ve etiketli beceri kartları
 - **Seçili çalışmalarım:** Proje kartları (Flutter, React, Node.js, Python, JavaScript, Java)
 - **Açık kaynak:** GitHub API'sinden canlı çekilen, üç satırlı kayan repo şeridi
 - Açık/koyu tema (sistem tercihini ve kullanıcı seçimini hatırlar)
@@ -15,7 +16,7 @@ Ankara'da yaşayan junior yazılım geliştirici Gökalp Vural'ın kişisel port
 
 ## Teknolojiler
 
-React 19, Vite, Tailwind CSS 4, oxlint. Yazı tipleri: Bricolage Grotesque ve IBM Plex Sans (Google Fonts).
+React 19, Vite, Tailwind CSS 4, oxlint. Yazı tipi: Inter (yoksa sistem yazı tipi).
 
 ## Çalıştırma
 
@@ -35,7 +36,7 @@ src/
   index.css               tema renkleri, animasyonlar, arka plan katmanları
   components/
     Hero.jsx              giriş ve kod penceresi animasyonu
-    About.jsx             hakkımda, istatistikler ve beceriler
+    About.jsx             biyografi, istatistikler ve beceri kartları
     Works.jsx             proje kartları (works dizisi)
     OpenSource.jsx        GitHub repolarının kayan şeridi
     ThemeToggle.jsx       açık/koyu tema düğmesi
