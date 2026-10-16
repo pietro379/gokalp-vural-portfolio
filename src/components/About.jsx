@@ -1,28 +1,24 @@
 ﻿// Her alanın kendi rengi ve etiketleri var; kartlar yazılım odaklı
 const skills = [
   {
-    icon: '📱',
     title: 'Mobil',
     text: 'Flutter ile Android ve iOS için hızlı, akıcı ve güvenli uygulamalar geliştiriyorum. Çevrimdışı çalışan şifreli kart cüzdanım bunun en güzel örneği.',
     tools: ['Flutter', 'Dart'],
     gradient: 'from-sky-400 to-indigo-500',
   },
   {
-    icon: '🌐',
     title: 'Web',
     text: 'React ve Node.js ile görev yönetim uygulamamı (Taskboard) yazdım. HTML, CSS ve JavaScript ile duyarlı, kullanıcı dostu arayüzler tasarlıyorum.',
     tools: ['React', 'Node.js', 'PostgreSQL', 'JavaScript', 'HTML', 'CSS'],
     gradient: 'from-orange-400 to-rose-500',
   },
   {
-    icon: '💻',
     title: 'Diğer diller',
     text: 'Mantığı sağlam, temiz ve okunabilir kod yazmayı seviyorum. Problem çözmek benim için bir bulmaca gibi eğlenceli.',
     tools: ['Python', 'C#'],
     gradient: 'from-violet-500 to-fuchsia-500',
   },
   {
-    icon: '🛠️',
     title: 'Araçlar',
     text: 'Sürüm kontrolü ve geliştirme ortamı günlük işimin parçası: kodu düzenli tutmak ve değişiklikleri takip etmek bana rahatlık veriyor.',
     tools: ['Git', 'GitHub', 'VS Code', 'Android Studio'],
@@ -48,43 +44,50 @@ export default function About() {
       <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-slate-600 dark:text-slate-300">
         Bilgisayar Programcılığı mezunuyum. Flutter ile çevrimdışı çalışan şifreli bir kart
         cüzdanı, React ve Node.js ile bir görev yönetim uygulaması (Taskboard) yazdım. Temiz kod
-        yazmaya ve arayüzlerin kullanımı kolay, düzenli ve hızlı olmasına özen gösteririm. ⚡
+        yazmaya ve arayüzlerin kullanımı kolay, düzenli ve hızlı olmasına özen gösteririm.
       </p>
 
       <ul className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
         {stats.map((st) => (
           <li
             key={st.label}
-            className="rounded-3xl border border-white/50 bg-white/50 p-5 text-center shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
+            className="rounded-xl border border-white/50 bg-white/50 px-5 py-4 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
           >
-            <span className={`bg-gradient-to-r ${st.gradient} bg-clip-text text-5xl font-black text-transparent`}>
+            <span className={`bg-gradient-to-r ${st.gradient} bg-clip-text font-mono text-4xl font-bold text-transparent`}>
               {st.value}
             </span>
-            <span className="mt-1 block text-sm font-bold text-slate-600 dark:text-slate-300">{st.label}</span>
+            <span className="mt-1 block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              {st.label}
+            </span>
           </li>
         ))}
       </ul>
 
       <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6">
-        {skills.map((s) => (
+        {skills.map((s, i) => (
           <article
             key={s.title}
-            className="group rounded-3xl border border-white/50 bg-white/50 p-6 shadow-xl sm:p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-white/5"
+            className="group relative overflow-hidden rounded-2xl border border-white/50 bg-white/50 p-6 shadow-lg backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-7 dark:border-white/10 dark:bg-white/5"
           >
-            <div
-              className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-3xl shadow-lg transition group-hover:rotate-6 group-hover:scale-110`}
-            >
-              {s.icon}
+            {/* Üstte ince renk çizgisi: her alanın kimliği */}
+            <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${s.gradient}`} />
+
+            <div className="flex items-baseline gap-3">
+              <span className={`bg-gradient-to-r ${s.gradient} bg-clip-text font-mono text-sm font-bold text-transparent`}>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="text-xl font-extrabold">{s.title}</h3>
             </div>
-            <h3 className="mt-6 text-2xl font-extrabold">{s.title}</h3>
+
             <p className="mt-3 font-medium leading-relaxed text-slate-600 dark:text-slate-300">
               {s.text}
             </p>
+
             <div className="mt-5 flex flex-wrap gap-2">
               {s.tools.map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-full border border-white/60 bg-white/60 px-3 py-1 text-sm font-bold text-slate-700 dark:border-white/10 dark:bg-white/10 dark:text-slate-200"
+                  className="rounded-md border border-slate-300/70 bg-white/40 px-2.5 py-1 font-mono text-[13px] font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
                 >
                   {tool}
                 </span>
