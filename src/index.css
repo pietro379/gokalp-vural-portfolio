@@ -5,9 +5,34 @@
 
 @theme {
   --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --animate-drift-a: drift-a 45s ease-in-out infinite;
+  --animate-drift-b: drift-b 55s ease-in-out infinite;
+  --animate-drift-c: drift-c 50s ease-in-out infinite;
+  --animate-drift-d: drift-d 60s ease-in-out infinite;
   --animate-gradient: gradient 8s ease infinite;
 }
 
+/* Balonlar yavaşça yukarı-aşağı ve yanlara süzülüp yer değiştirir */
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(18vw, 30vh) scale(1.1); }
+  66% { transform: translate(6vw, 65vh) scale(0.95); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25vw, -20vh) scale(0.95); }
+  66% { transform: translate(-10vw, 35vh) scale(1.12); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(25vw, -40vh) scale(1.1); }
+  66% { transform: translate(-20vw, -15vh) scale(0.95); }
+}
+@keyframes drift-d {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(35vw, -30vh) scale(1.15); }
+  66% { transform: translate(-15vw, 25vh) scale(0.9); }
+}
 
 @keyframes gradient {
   0%, 100% { background-position: 0% 50%; }
@@ -126,43 +151,4 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highl
   filter: blur(16px);
   opacity: 0.6;
   animation: halo-spin 6s linear infinite;
-}
-
-/* Lav lambası: bloblar tabandan yükselir, uzayıp basılır, tepeden geri alçalır */
-@keyframes lava-a {
-  0%, 100% { transform: translate(0, 0) scale(1, 1); }
-  20% { transform: translate(3vw, -32vh) scale(0.92, 1.14); }
-  45% { transform: translate(-4vw, -80vh) scale(1.08, 0.92); }
-  62% { transform: translate(2vw, -92vh) scale(1, 1.05); }
-  82% { transform: translate(-3vw, -38vh) scale(0.95, 1.1); }
-}
-@keyframes lava-b {
-  0%, 100% { transform: translate(0, 0) scale(1, 1); }
-  25% { transform: translate(-5vw, -42vh) scale(0.9, 1.18); }
-  50% { transform: translate(4vw, -86vh) scale(1.1, 0.9); }
-  75% { transform: translate(-2vw, -44vh) scale(0.96, 1.08); }
-}
-@keyframes lava-c {
-  0%, 100% { transform: translate(0, 0) scale(1, 1); }
-  18% { transform: translate(5vw, -26vh) scale(0.94, 1.12); }
-  40% { transform: translate(-3vw, -62vh) scale(1.06, 0.94); }
-  58% { transform: translate(4vw, -96vh) scale(0.92, 1.12); }
-  80% { transform: translate(-4vw, -48vh) scale(1.05, 0.96); }
-}
-@keyframes lava-d {
-  0%, 100% { transform: translate(0, 0) scale(1, 1); }
-  30% { transform: translate(-4vw, -55vh) scale(0.92, 1.16); }
-  55% { transform: translate(5vw, -88vh) scale(1.1, 0.9); }
-  78% { transform: translate(-2vw, -30vh) scale(0.96, 1.08); }
-}
-@keyframes lava-pool {
-  0%, 100% { transform: translate(0, 0) scale(1, 1); }
-  50% { transform: translate(2vw, -2.5rem) scale(1.04, 1.12); }
-}
-@theme {
-  --animate-lava-a: lava-a 40s ease-in-out infinite;
-  --animate-lava-b: lava-b 34s ease-in-out infinite;
-  --animate-lava-c: lava-c 44s ease-in-out infinite;
-  --animate-lava-d: lava-d 38s ease-in-out infinite;
-  --animate-lava-pool: lava-pool 14s ease-in-out infinite;
 }
