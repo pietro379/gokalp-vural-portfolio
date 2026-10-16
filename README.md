@@ -4,7 +4,7 @@ Ankara'da yaşayan junior yazılım geliştirici Gökalp Vural'ın kişisel port
 
 ## Özellikler
 
-- **Tema:** Lav lambası gibi yükselip alçalan renkli arka plan blobları, cam efektli kartlar, gradyanlı başlık
+- **Tema:** Süzülen renkli arka plan balonları, cam efektli kartlar, gradyanlı başlık
 - **Hero:** Harf harf yazılan kod penceresi animasyonu, kademeli sayfa açılışı, CV indirme düğmesi
 - **Hakkımda:** Yazılım odaklı biyografi, kısa istatistikler ve etiketli beceri kartları
 - **Seçili çalışmalarım:** Proje kartları (Flutter, React, Node.js, Python, JavaScript, Java)
