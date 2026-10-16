@@ -1,11 +1,10 @@
 # Gökalp Vural | Portfolyo
 
 Ankara'da yaşayan junior yazılım geliştirici Gökalp Vural'ın kişisel portfolyo sitesi.
-İçerik yenilenmeden önceki hâli `v1-archive` etiketinde saklanıyor.
 
 ## Özellikler
 
-- **Tema:** Süzülen renkli arka plan balonları, cam efektli kartlar, gradyanlı başlık
+- **Tema:** Lav lambası gibi yükselip alçalan renkli arka plan blobları, cam efektli kartlar, gradyanlı başlık
 - **Hero:** Harf harf yazılan kod penceresi animasyonu, kademeli sayfa açılışı, CV indirme düğmesi
 - **Hakkımda:** Yazılım odaklı biyografi, kısa istatistikler ve etiketli beceri kartları
 - **Seçili çalışmalarım:** Proje kartları (Flutter, React, Node.js, Python, JavaScript, Java)
