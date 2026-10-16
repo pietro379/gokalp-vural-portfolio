@@ -1,4 +1,4 @@
-// Proje verileri: Portföy klasöründeki README'lerden alındı
+﻿// Proje verileri: Portföy klasöründeki README'lerden alındı
 const works = [
   {
     title: 'Kart Cüzdanı',
@@ -215,12 +215,13 @@ function Card({ w }) {
 
 export default function Works() {
   return (
-    <section id="calismalar" className="band-works">
-    <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-      <h2 className="section-title font-display text-4xl font-extrabold tracking-tight sm:text-6xl">
-        Seçili çalışmalarım
+    <section id="calismalar" className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+      <h2 className="text-center text-4xl font-black tracking-tight sm:text-6xl">
+        <span className="text-fuchsia-500 dark:text-fuchsia-400">
+          Seçili Çalışmalarım
+        </span>
       </h2>
-      <p className="mt-4 max-w-xl text-lg text-ink/75 dark:text-white/70">
+      <p className="mx-auto mt-4 max-w-xl text-center font-medium text-slate-600 dark:text-slate-300">
         Detaylar için kartların üzerine gel ya da dokun.
       </p>
 
@@ -229,7 +230,6 @@ export default function Works() {
           <Card key={w.title} w={w} />
         ))}
       </div>
-    </div>
     </section>
   )
 }

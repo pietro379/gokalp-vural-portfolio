@@ -12,11 +12,11 @@ const lines = [
 ]
 
 const tokenColor = {
-  k: 'text-[#8da0ff]',
-  p: 'text-[#e6e9f2]',
-  s: 'text-[#7ee0b5]',
-  b: 'text-[#ffc66b]',
-  d: 'text-[#8b93a8]',
+  k: 'text-fuchsia-400',
+  p: 'text-slate-100',
+  s: 'text-emerald-300',
+  b: 'text-amber-300',
+  d: 'text-slate-400',
 }
 
 const totalChars = lines.flat().reduce((sum, [, text]) => sum + text.length, 0)
@@ -60,7 +60,7 @@ function Chip({ className, delay, children }) {
   return (
     <div
       style={{ animationDelay: delay }}
-      className={`animate-float absolute rounded-full border border-ink/10 bg-white/80 px-3.5 py-1.5 text-xs font-semibold text-ink shadow-lg shadow-ink/10 backdrop-blur-md dark:border-white/15 dark:bg-white/10 dark:text-white ${className}`}
+      className={`animate-float absolute rounded-full border border-white/50 bg-white/60 px-3.5 py-1.5 text-xs font-bold text-slate-800 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-white ${className}`}
     >
       {children}
     </div>
@@ -72,16 +72,16 @@ function CodeWindow() {
   const done = visible >= totalChars
 
   return (
-    <div className="relative mx-auto w-full max-w-md">
-      {/* Pencerenin arkasında dönen vurgu ışığı */}
-      <div className="code-halo absolute -inset-px rounded-2xl" />
+    <div className="relative mx-auto w-full max-w-md text-left">
+      {/* Pencerenin arkasında dönen renkli ışık */}
+      <div className="code-halo absolute -inset-px rounded-3xl" />
 
-      <div className="animate-float-slow relative overflow-hidden rounded-2xl bg-[#0f1420] shadow-2xl shadow-ink/30 ring-1 ring-white/10">
+      <div className="animate-float-slow relative overflow-hidden rounded-3xl bg-slate-950/90 shadow-2xl shadow-fuchsia-500/20 ring-1 ring-white/10 backdrop-blur-xl">
         <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
           <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
           <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-          <span className="ml-3 font-mono text-xs text-[#8b93a8]">gokalp.js</span>
+          <span className="ml-3 font-mono text-xs text-slate-400">gokalp.js</span>
         </div>
 
         <pre className="min-h-[11.5rem] overflow-hidden px-5 py-5 font-mono text-[12px] leading-[1.6] sm:text-[13.5px]">
@@ -90,10 +90,10 @@ function CodeWindow() {
           </code>
         </pre>
 
-        <div className="flex items-center gap-2 border-t border-white/10 px-4 py-2.5 font-mono text-xs text-[#8b93a8]">
+        <div className="flex items-center gap-2 border-t border-white/10 px-4 py-2.5 font-mono text-xs text-slate-400">
           <span className={`h-2 w-2 rounded-full bg-[#28c840] ${done ? 'animate-pulse' : 'opacity-40'}`} />
           {done ? 'Derleme başarılı' : 'yazılıyor…'}
-          <span className={`ml-auto inline-block h-4 w-[2px] bg-[#8da0ff] ${done ? 'animate-blink' : ''}`} />
+          <span className={`ml-auto inline-block h-4 w-[2px] bg-fuchsia-400 ${done ? 'animate-blink' : ''}`} />
         </div>
       </div>
 
@@ -106,46 +106,49 @@ function CodeWindow() {
 
 export default function Hero() {
   return (
-    <div className="relative">
-    <div aria-hidden className="hero-glow pointer-events-none absolute inset-0" />
-    <div aria-hidden className="hero-dots pointer-events-none absolute inset-0" />
-    <section className="relative mx-auto grid min-h-svh max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-[1.1fr_1fr] md:gap-6">
-      <div>
-        <h1 style={{ '--i': 0 }} className="rise font-display text-6xl font-extrabold leading-[0.95] tracking-tight sm:text-8xl">
-          Gökalp
-          <br />
-          Vural
-        </h1>
-
-        <p style={{ '--i': 1 }} className="rise mt-8 max-w-md text-xl font-semibold sm:text-2xl">
-          Ankara'da junior yazılım geliştirici.
-        </p>
-        <p style={{ '--i': 2 }} className="rise mt-3 max-w-md text-lg leading-relaxed text-ink/75 dark:text-white/70">
-          Flutter, React ve Node.js ile uygulamalar geliştiriyorum. Staj ve junior pozisyonlara açığım.
-        </p>
-
-        <div style={{ '--i': 3 }} className="rise mt-10 flex flex-wrap gap-3">
-          <a
-            href="/Gokalp_Vural_CV.pdf"
-            download
-            className="rounded-lg bg-accent px-6 py-3.5 text-lg font-semibold text-white transition hover:brightness-110 active:scale-[0.98] dark:bg-accent-soft dark:text-night"
-          >
-            CV'yi indir
-          </a>
-          <a
-            href="#calismalar"
-            className="rounded-lg border-2 border-ink/80 px-6 py-3 text-lg font-semibold transition hover:bg-ink hover:text-paper active:scale-[0.98] dark:border-white/70 dark:hover:bg-white dark:hover:text-night"
-          >
-            Projelere bak
-          </a>
-        </div>
+    <section className="flex min-h-svh flex-col items-center justify-center px-6 py-24 text-center">
+      <div
+        style={{ '--i': 0 }}
+        className="rise rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-semibold shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-white/10"
+      >
+        <span className="mr-2">👋</span>
+        Merhaba
       </div>
 
-      {/* Kod penceresi: ekran okuyucular için dekoratif, bilgi sol sütunda zaten yazıyor */}
-      <div aria-hidden style={{ '--i': 4 }} className="rise">
+      <h1
+        style={{ '--i': 1 }}
+        className="rise animate-gradient mt-8 bg-gradient-to-r from-fuchsia-500 via-orange-400 to-cyan-400 bg-[length:200%_200%] bg-clip-text text-5xl font-black leading-tight tracking-tight text-transparent sm:text-8xl md:text-9xl"
+      >
+        Gökalp Vural
+      </h1>
+
+      <p style={{ '--i': 2 }} className="rise mt-6 max-w-xl text-lg font-semibold text-slate-600 sm:text-2xl dark:text-slate-300">
+        Ankara'da junior yazılım geliştirici.
+      </p>
+      <p style={{ '--i': 3 }} className="rise mt-3 max-w-xl text-base font-medium text-slate-500 sm:text-lg dark:text-slate-400">
+        Flutter, React ve Node.js ile uygulamalar geliştiriyorum. Staj ve junior pozisyonlara açığım.
+      </p>
+
+      <div style={{ '--i': 4 }} className="rise mt-10 flex flex-wrap justify-center gap-4">
+        <a
+          href="/Gokalp_Vural_CV.pdf"
+          download
+          className="rounded-full bg-gradient-to-r from-fuchsia-500 to-orange-400 px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-fuchsia-500/30 transition hover:scale-105 active:scale-95"
+        >
+          CV'yi indir ↓
+        </a>
+        <a
+          href="#hakkimda"
+          className="rounded-full border border-white/50 bg-white/50 px-8 py-4 text-lg font-extrabold text-slate-800 shadow-xl backdrop-blur-xl transition hover:scale-105 active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white"
+        >
+          Beni Tanı
+        </a>
+      </div>
+
+      {/* Kod penceresi: ekran okuyucular için dekoratif, bilgi yukarıdaki metinlerde zaten yazıyor */}
+      <div aria-hidden style={{ '--i': 5 }} className="rise mt-16 w-full">
         <CodeWindow />
       </div>
     </section>
-    </div>
   )
 }
