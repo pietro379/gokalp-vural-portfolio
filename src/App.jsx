@@ -15,18 +15,19 @@ function getInitialTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-// Arka plandaki süzülen balonlar (konum, boyut, renk, hareket rotası).
+// Lav lambası: her blob tabandan yavaşça yükselir, tepeye varıp geri alçalır.
+// [soldan konum, boyut, açık tema rengi, koyu tema rengi, hareket, süre (sn), gecikme (sn)]
 // "hidden sm:block" olanlar telefonda performans için gizlenir.
-const balloons = [
-  'animate-drift-a -left-24 top-0 h-96 w-96 bg-fuchsia-500/40 dark:bg-fuchsia-600/30',
-  'animate-drift-b right-0 top-1/3 h-[28rem] w-[28rem] bg-cyan-400/40 dark:bg-cyan-500/25',
-  'animate-drift-c bottom-0 left-1/3 h-96 w-96 bg-amber-400/40 dark:bg-violet-600/30',
-  'animate-drift-d left-1/4 top-1/2 h-80 w-80 bg-emerald-400/40 dark:bg-blue-600/30',
-  'animate-drift-b left-1/2 top-0 h-72 w-72 bg-rose-400/40 dark:bg-pink-600/30',
-  'animate-drift-a right-1/4 bottom-0 h-80 w-80 bg-sky-400/40 dark:bg-indigo-600/30',
-  'animate-drift-c hidden sm:block -right-20 top-0 h-72 w-72 bg-orange-400/40 dark:bg-orange-600/25',
-  'animate-drift-d hidden sm:block -left-16 bottom-1/4 h-80 w-80 bg-violet-400/40 dark:bg-teal-500/25',
-  'animate-drift-a hidden sm:block left-2/3 top-1/4 h-64 w-64 bg-lime-300/40 dark:bg-fuchsia-500/25',
+const blobs = [
+  ['left-[4%] h-64 w-64', 'bg-fuchsia-500 dark:bg-fuchsia-600', 'animate-lava-a', 38, -6],
+  ['left-[20%] h-48 w-48', 'bg-cyan-400 dark:bg-cyan-500', 'animate-lava-b', 31, -14],
+  ['left-[34%] h-72 w-72', 'bg-amber-400 dark:bg-violet-600', 'animate-lava-c', 44, -22],
+  ['left-[48%] h-52 w-52', 'bg-emerald-400 dark:bg-blue-600', 'animate-lava-d', 36, -3],
+  ['left-[60%] h-64 w-64', 'bg-rose-400 dark:bg-pink-600', 'animate-lava-a', 47, -30],
+  ['left-[72%] h-48 w-48', 'bg-sky-400 dark:bg-indigo-600', 'animate-lava-b', 33, -9],
+  ['hidden sm:block left-[84%] h-60 w-60', 'bg-orange-400 dark:bg-orange-600', 'animate-lava-c', 41, -18],
+  ['hidden sm:block left-[12%] h-40 w-40', 'bg-violet-400 dark:bg-teal-500', 'animate-lava-d', 29, -25],
+  ['hidden sm:block left-[90%] h-44 w-44', 'bg-lime-300 dark:bg-fuchsia-500', 'animate-lava-a', 35, -11],
 ]
 
 export default function App() {
@@ -43,13 +44,37 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white">
-      {/* Arka plan gradient küreleri */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
-        {balloons.map((b, i) => (
+      {/* Lav lambası: bloblar "goo" filtresiyle birbirine yapışıp ayrılır */}
+      <svg aria-hidden className="absolute h-0 w-0">
+        <defs>
+          <filter id="lava">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+              result="goo"
+            />
+            <feGaussianBlur in="goo" stdDeviation="9" />
+          </filter>
+        </defs>
+      </svg>
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-0 overflow-hidden opacity-[0.34] dark:opacity-[0.32]"
+        style={{ filter: 'url(#lava)' }}
+      >
+        {/* Tabandaki sıcak havuz: yükselen bloblar buradan kopar ve geri döner */}
+        <div className="animate-lava-pool absolute -bottom-24 -left-[10%] h-52 w-[55%] rounded-full bg-fuchsia-500 will-change-transform dark:bg-fuchsia-600" />
+        <div
+          className="animate-lava-pool absolute -bottom-28 -right-[10%] h-56 w-[55%] rounded-full bg-cyan-400 will-change-transform dark:bg-cyan-500"
+          style={{ animationDelay: '-6s' }}
+        />
+        {blobs.map(([place, color, motion, seconds, delay], i) => (
           <div
             key={i}
-            className={`absolute rounded-full blur-2xl will-change-transform sm:blur-3xl ${b}`}
-            style={{ animationDelay: `${-i * 9}s` }}
+            className={`absolute -bottom-20 rounded-full will-change-transform ${place} ${color} ${motion}`}
+            style={{ animationDuration: `${seconds}s`, animationDelay: `${delay}s` }}
           />
         ))}
       </div>
