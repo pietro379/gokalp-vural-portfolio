@@ -40,7 +40,8 @@ function RepoCard({ repo, hidden = false }) {
       // Şeritteki ikinci kopya ekran okuyuculardan ve klavye odağından gizlenir
       aria-hidden={hidden || undefined}
       tabIndex={hidden ? -1 : undefined}
-      className="group relative mr-6 mb-6 flex h-44 w-72 shrink-0 flex-col rounded-3xl border border-white/50 bg-white/50 p-6 shadow-xl backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-white/5 sm:w-80"
+      style={{ '--c': color }}
+      className="group relative mr-6 mb-6 flex h-44 w-72 shrink-0 flex-col rounded-3xl border-2 border-(--c)/30 bg-white/60 p-6 shadow-xl backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-(--c) hover:shadow-2xl dark:bg-white/5 sm:w-80"
     >
       {/* Köşede yanan neon nokta */}
       <span
@@ -56,7 +57,7 @@ function RepoCard({ repo, hidden = false }) {
         {repo.description || 'Açıklama eklenmemiş.'}
       </p>
       <div className="mt-4 flex items-center justify-between text-sm font-bold">
-        <span style={{ color }}>
+        <span className="text-[color-mix(in_srgb,var(--c)_55%,#1c2331)] dark:text-(--c)">
           {repo.language ?? 'Diğer'}
           {repo.fork && <span className="ml-2 text-xs text-slate-500 dark:text-slate-400">fork</span>}
         </span>
@@ -98,15 +99,15 @@ export default function OpenSource() {
   }, [])
 
   return (
-    <section id="acik-kaynak" className="overflow-hidden py-16 sm:py-24">
-      <h2 className="px-6 text-center text-4xl font-black tracking-tight sm:text-6xl">
-        <span className="text-emerald-500 dark:text-emerald-400">
-          Açık Kaynak Projelerim
-        </span>
-      </h2>
-      <p className="mx-auto mt-4 max-w-xl px-6 text-center font-medium text-slate-600 dark:text-slate-300">
-        GitHub profilimdeki tüm repolar canlı çekiliyor. Üzerine gelince akış durur, tıklayınca repoya gidersin.
-      </p>
+    <section id="acik-kaynak" className="band-oss overflow-hidden py-16 sm:py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="section-title font-display text-4xl font-extrabold tracking-tight sm:text-6xl">
+          Açık kaynak projelerim
+        </h2>
+        <p className="mt-4 max-w-xl text-lg text-ink/75 dark:text-white/70">
+          GitHub profilimdeki tüm repolar canlı çekiliyor. Üzerine gelince akış durur, tıklayınca repoya gidersin.
+        </p>
+      </div>
 
       {error && (
         <p className="mt-12 px-6 text-center font-semibold text-rose-500">

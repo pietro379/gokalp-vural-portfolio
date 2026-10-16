@@ -1,4 +1,4 @@
-﻿// Proje verileri: Portföy klasöründeki README'lerden alındı
+// Proje verileri: Portföy klasöründeki README'lerden alındı
 const works = [
   {
     title: 'Kart Cüzdanı',
@@ -26,7 +26,7 @@ const works = [
     text: 'Saf JavaScript ile yazılmış 12 retro oyunu tek çatıda toplayan oyun portalı.',
     glow: 'hover:shadow-fuchsia-500/50',
     gradient: 'from-fuchsia-500 to-rose-500',
-    image: '/works/retrogames.png',
+    image: '/works/retrogames.webp',
     link: 'https://pietro379.github.io/game-website/',
     span: 'sm:col-span-2',
   },
@@ -36,7 +36,7 @@ const works = [
     text: 'İndirim kurallarını uygulayan sepet ve fatura uygulaması; web ve komut satırı.',
     glow: 'hover:shadow-orange-500/50',
     gradient: 'from-orange-400 to-amber-500',
-    image: '/works/add-to-cart.png',
+    image: '/works/add-to-cart.webp',
     link: 'https://pietro379.github.io/add-to-cart-project/',
   },
   {
@@ -45,7 +45,7 @@ const works = [
     text: 'JPEG, PNG ve WebP görselleri tarayıcıda sıkıştırır; hiçbir dosya sunucuya yüklenmez.',
     glow: 'hover:shadow-emerald-500/50',
     gradient: 'from-emerald-400 to-cyan-500',
-    image: '/works/image-compressor.png',
+    image: '/works/image-compressor.webp',
     link: 'https://pietro379.github.io/image-compressor/',
   },
   {
@@ -54,7 +54,7 @@ const works = [
     text: 'Yağmur ve şömine sesleriyle, açık/koyu temalı sıcak bir odaklanma sayacı.',
     glow: 'hover:shadow-amber-500/50',
     gradient: 'from-amber-400 to-orange-600',
-    image: '/works/odaklanma.png',
+    image: '/works/odaklanma.webp',
     link: 'https://pietro379.github.io/cozy-focus-timer/',
     span: 'sm:col-span-2',
   },
@@ -64,7 +64,7 @@ const works = [
     text: 'Fotoğrafını 29 retro kameradan birinde çekilmiş gibi göster, fotoğraf kabini şeritleri ve polaroidlerle kolaj yap. Flaş patlar, PDF, GIF ya da PNG olarak indirirsin.',
     glow: 'hover:shadow-rose-500/50',
     gradient: 'from-rose-500 to-red-600',
-    image: '/works/photobooth.png',
+    image: '/works/photobooth.webp',
     link: 'https://pietro379.github.io/retro-photo-booth/',
     span: 'sm:col-span-2',
   },
@@ -74,8 +74,8 @@ const works = [
     text: 'Karışık klasörleri dosya türüne ve tarihe göre düzenleyen komut satırı aracı. Kuru çalıştırma ve tek komutla geri alma destekler.',
     glow: 'hover:shadow-yellow-500/50',
     gradient: 'from-yellow-400 to-blue-600',
-    image: '/works/tidyfiles.png',
-    mobileImage: '/works/tidyfiles-mobile.png',
+    image: '/works/tidyfiles.webp',
+    mobileImage: '/works/tidyfiles-mobile.webp',
     link: 'https://github.com/pietro379/tidyfiles',
     span: 'sm:col-span-4',
   },
@@ -85,7 +85,7 @@ const works = [
     text: 'Takımlar için görev yönetimi: rollü çalışma alanları, sürükle-bırak pano, yorumlar ve etkinlik geçmişi. Express REST API, JWT, otomatik testler ve CI ile Vercel üzerinde yayında.',
     glow: 'hover:shadow-indigo-500/50',
     gradient: 'from-indigo-500 to-sky-500',
-    image: '/works/taskboard.png',
+    image: '/works/taskboard.webp',
     lightCover: true,
     link: 'https://taskboard-app-red.vercel.app',
     span: 'sm:col-span-4',
@@ -161,7 +161,7 @@ function CardStackPreview() {
       <FloatChip className="right-8 top-[58%]" delay="2.4s">✓ KVKK</FloatChip>
 
       {/* PIN noktaları sırayla dolar */}
-      <div className="absolute left-6 top-[62%] flex items-center gap-1.5 rounded-full bg-black/30 px-3 py-2 backdrop-blur-md">
+      <div className="absolute left-6 top-[62%] hidden items-center sm:flex gap-1.5 rounded-full bg-black/30 px-3 py-2 backdrop-blur-md">
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <span key={i} className="animate-wallet-pin h-2.5 w-2.5 rounded-full bg-white" style={{ animationDelay: `${i * 0.35}s` }} />
         ))}
@@ -176,7 +176,7 @@ function Card({ w }) {
   return (
     <Tag
       {...extra}
-      className={`group relative block min-h-64 overflow-hidden rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl transition duration-500 hover:z-10 hover:scale-[1.03] hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
+      className={`group relative block min-h-[26rem] overflow-hidden sm:min-h-64 rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl transition duration-500 hover:z-10 hover:scale-[1.03] hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
     >
       {w.image ? (
         // Geniş kapaklar telefonda yanlardan kırpılır; mobileImage varsa dar ekranda o kullanılır
@@ -215,21 +215,21 @@ function Card({ w }) {
 
 export default function Works() {
   return (
-    <section id="calismalar" className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-      <h2 className="text-center text-4xl font-black tracking-tight sm:text-6xl">
-        <span className="text-fuchsia-500 dark:text-fuchsia-400">
-          Seçili Çalışmalarım
-        </span>
+    <section id="calismalar" className="band-works">
+    <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+      <h2 className="section-title font-display text-4xl font-extrabold tracking-tight sm:text-6xl">
+        Seçili çalışmalarım
       </h2>
-      <p className="mx-auto mt-4 max-w-xl text-center font-medium text-slate-600 dark:text-slate-300">
+      <p className="mt-4 max-w-xl text-lg text-ink/75 dark:text-white/70">
         Detaylar için kartların üzerine gel ya da dokun.
       </p>
 
-      <div className="mt-10 grid auto-rows-[18rem] gap-5 sm:grid-cols-4">
+      <div className="mt-10 grid gap-5 sm:auto-rows-[18rem] sm:grid-cols-4">
         {works.map((w) => (
           <Card key={w.title} w={w} />
         ))}
       </div>
+    </div>
     </section>
   )
 }

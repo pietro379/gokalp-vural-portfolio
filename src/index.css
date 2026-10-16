@@ -4,43 +4,21 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
-  --animate-drift-a: drift-a 45s ease-in-out infinite;
-  --animate-drift-b: drift-b 55s ease-in-out infinite;
-  --animate-drift-c: drift-c 50s ease-in-out infinite;
-  --animate-drift-d: drift-d 60s ease-in-out infinite;
-  --animate-gradient: gradient 8s ease infinite;
-}
-
-/* Balonlar yavaşça yukarı-aşağı ve yanlara süzülüp yer değiştirir */
-@keyframes drift-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(18vw, 30vh) scale(1.1); }
-  66% { transform: translate(6vw, 65vh) scale(0.95); }
-}
-@keyframes drift-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-25vw, -20vh) scale(0.95); }
-  66% { transform: translate(-10vw, 35vh) scale(1.12); }
-}
-@keyframes drift-c {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(25vw, -40vh) scale(1.1); }
-  66% { transform: translate(-20vw, -15vh) scale(0.95); }
-}
-@keyframes drift-d {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(35vw, -30vh) scale(1.15); }
-  66% { transform: translate(-15vw, 25vh) scale(0.9); }
-}
-
-@keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  /* Palet: soğuk gri zemin, mürekkep rengi yazı, tek kobalt vurgu */
+  --color-paper: #eceef2;
+  --color-ink: #1c2331;
+  --color-night: #161b26;
+  --color-accent: #2a4bff;
+  --color-accent-soft: #8da0ff;
 }
 
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--font-sans); }
+/* Klavye ile gezinirken odak her zaman görünür olsun */
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+.dark :focus-visible { outline-color: var(--color-accent-soft); }
 /* Mobil: yatay çevirmede yazı büyümesini ve dokunmada mavi vurguyu engelle */
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
 
@@ -113,4 +91,107 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highl
   --animate-wallet-pulse: wallet-pulse 4s ease-in-out infinite;
   --animate-wallet-twinkle: wallet-twinkle 2.5s ease-in-out infinite;
   --animate-wallet-pin: wallet-pin 2.1s ease-in-out infinite;
+}
+
+/* Bölüm başlıkları: üstte kısa vurgu çizgisi */
+.section-title::before {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 0.3rem;
+  margin-bottom: 1rem;
+  border-radius: 9999px;
+  background: var(--color-accent);
+}
+.dark .section-title::before { background: var(--color-accent-soft); }
+
+/* Hero dokusu: ince nokta ızgarası, ortaya doğru solar */
+.hero-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-ink) 22%, transparent) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+}
+.dark .hero-dots {
+  background-image: radial-gradient(rgb(255 255 255 / 0.2) 1px, transparent 1.5px);
+}
+
+/* Sayfa açılışı: Hero öğeleri sırayla yukarı süzülerek belirir (tek, orkestre edilmiş giriş) */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 110ms); }
+
+/* Hero arka planı: nokta dokusunun altında vurgu renginde yumuşak ışık */
+.hero-glow {
+  background:
+    radial-gradient(34rem 23.8rem at 78% 38%, color-mix(in srgb, var(--color-accent) 16%, transparent) 0%, color-mix(in srgb, var(--color-accent) 9.6%, transparent) 22%, color-mix(in srgb, var(--color-accent) 4.8%, transparent) 42%, color-mix(in srgb, var(--color-accent) 1.9%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.5%, transparent) 80%, transparent 100%),
+    radial-gradient(23.8rem 17rem at 10% 90%, color-mix(in srgb, var(--color-accent) 8%, transparent) 0%, color-mix(in srgb, var(--color-accent) 4.8%, transparent) 22%, color-mix(in srgb, var(--color-accent) 2.4%, transparent) 42%, color-mix(in srgb, var(--color-accent) 1%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.2%, transparent) 80%, transparent 100%);
+}
+.hero-glow {
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+.dark .hero-glow {
+  background:
+    radial-gradient(34rem 23.8rem at 78% 38%, color-mix(in srgb, var(--color-accent) 28%, transparent) 0%, color-mix(in srgb, var(--color-accent) 16.8%, transparent) 22%, color-mix(in srgb, var(--color-accent) 8.4%, transparent) 42%, color-mix(in srgb, var(--color-accent) 3.4%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.8%, transparent) 80%, transparent 100%),
+    radial-gradient(23.8rem 17rem at 10% 90%, color-mix(in srgb, var(--color-accent-soft) 10%, transparent) 0%, color-mix(in srgb, var(--color-accent-soft) 6%, transparent) 22%, color-mix(in srgb, var(--color-accent-soft) 3%, transparent) 42%, color-mix(in srgb, var(--color-accent-soft) 1.2%, transparent) 62%, color-mix(in srgb, var(--color-accent-soft) 0.3%, transparent) 80%, transparent 100%);
+}
+
+/* Hero kod penceresi: süzülme, imleç ve dönen ışık çerçevesi */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@theme {
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-float-slow: float 7s ease-in-out infinite;
+  --animate-blink: blink 1.1s step-end infinite;
+}
+
+@property --halo-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes halo-spin { to { --halo-angle: 360deg; } }
+.code-halo {
+  background: conic-gradient(from var(--halo-angle), transparent 0deg, var(--color-accent) 70deg, var(--color-accent-soft) 110deg, transparent 180deg);
+  filter: blur(14px);
+  opacity: 0.55;
+  animation: halo-spin 6s linear infinite;
+}
+.dark .code-halo { opacity: 0.7; }
+
+/* Alt bölümler: zemine yumuşak renk bantları (bölümler arası geçiş gradyanla, kesik çizgi yok) */
+.band-about {
+  background:
+    radial-gradient(52rem 17rem at 16% 45%, color-mix(in srgb, var(--color-accent) 11%, transparent) 0%, color-mix(in srgb, var(--color-accent) 6.6%, transparent) 22%, color-mix(in srgb, var(--color-accent) 3.3%, transparent) 42%, color-mix(in srgb, var(--color-accent) 1.3%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.3%, transparent) 80%, transparent 100%),
+    radial-gradient(44rem 15rem at 88% 55%, color-mix(in srgb, #0fa77a 9%, transparent) 0%, color-mix(in srgb, #0fa77a 5.4%, transparent) 22%, color-mix(in srgb, #0fa77a 2.7%, transparent) 42%, color-mix(in srgb, #0fa77a 1.1%, transparent) 62%, color-mix(in srgb, #0fa77a 0.3%, transparent) 80%, transparent 100%);
+}
+.band-works {
+  background:
+    radial-gradient(28.9rem 12.8rem at 88% 22%, color-mix(in srgb, #e0457b 9%, transparent) 0%, color-mix(in srgb, #e0457b 5.4%, transparent) 22%, color-mix(in srgb, #e0457b 2.7%, transparent) 42%, color-mix(in srgb, #e0457b 1.1%, transparent) 62%, color-mix(in srgb, #e0457b 0.3%, transparent) 80%, transparent 100%),
+    radial-gradient(27.2rem 17rem at 6% 55%, color-mix(in srgb, var(--color-accent) 9%, transparent) 0%, color-mix(in srgb, var(--color-accent) 5.4%, transparent) 22%, color-mix(in srgb, var(--color-accent) 2.7%, transparent) 42%, color-mix(in srgb, var(--color-accent) 1.1%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.3%, transparent) 80%, transparent 100%);
+}
+.band-oss {
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--color-accent) 10%, transparent) 35%, color-mix(in srgb, var(--color-accent) 14%, transparent) 70%, transparent 100%);
+}
+.dark .band-about {
+  background:
+    radial-gradient(52rem 17rem at 16% 45%, color-mix(in srgb, var(--color-accent) 24%, transparent) 0%, color-mix(in srgb, var(--color-accent) 14.4%, transparent) 22%, color-mix(in srgb, var(--color-accent) 7.2%, transparent) 42%, color-mix(in srgb, var(--color-accent) 2.9%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.7%, transparent) 80%, transparent 100%),
+    radial-gradient(44rem 15rem at 88% 55%, color-mix(in srgb, #0fa77a 16%, transparent) 0%, color-mix(in srgb, #0fa77a 9.6%, transparent) 22%, color-mix(in srgb, #0fa77a 4.8%, transparent) 42%, color-mix(in srgb, #0fa77a 1.9%, transparent) 62%, color-mix(in srgb, #0fa77a 0.5%, transparent) 80%, transparent 100%);
+}
+.dark .band-works {
+  background:
+    radial-gradient(28.9rem 12.8rem at 88% 22%, color-mix(in srgb, #e0457b 16%, transparent) 0%, color-mix(in srgb, #e0457b 9.6%, transparent) 22%, color-mix(in srgb, #e0457b 4.8%, transparent) 42%, color-mix(in srgb, #e0457b 1.9%, transparent) 62%, color-mix(in srgb, #e0457b 0.5%, transparent) 80%, transparent 100%),
+    radial-gradient(27.2rem 17rem at 6% 55%, color-mix(in srgb, var(--color-accent) 20%, transparent) 0%, color-mix(in srgb, var(--color-accent) 12%, transparent) 22%, color-mix(in srgb, var(--color-accent) 6%, transparent) 42%, color-mix(in srgb, var(--color-accent) 2.4%, transparent) 62%, color-mix(in srgb, var(--color-accent) 0.6%, transparent) 80%, transparent 100%);
+}
+.dark .band-oss {
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--color-accent) 16%, transparent) 35%, color-mix(in srgb, var(--color-accent) 26%, transparent) 70%, transparent 100%);
 }
