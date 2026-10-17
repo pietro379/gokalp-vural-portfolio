@@ -2,6 +2,8 @@
 
 Ankara'da yaşayan junior yazılım geliştirici Gökalp Vural'ın kişisel portfolyo sitesi.
 
+### 👉 [Canlı site](https://gokalp-vural-portfolio.vercel.app)
+
 ## Özellikler
 
 - **Tema:** Süzülen renkli arka plan balonları, cam efektli kartlar, gradyanlı başlık
@@ -9,6 +11,7 @@ Ankara'da yaşayan junior yazılım geliştirici Gökalp Vural'ın kişisel port
 - **Hakkımda:** Yazılım odaklı biyografi, kısa istatistikler ve etiketli beceri kartları
 - **Seçili çalışmalarım:** Proje kartları (Flutter, React, Node.js, Python, JavaScript, Java)
 - **Açık kaynak:** GitHub API'sinden canlı çekilen, üç satırlı kayan repo şeridi
+- **Hareket:** Bölümler kaydırdıkça büyüyerek belirir, ad başlığında yavaş renk geçişi, proje kartları imlece doğru eğilir ve ışık imleci takip eder
 - Açık/koyu tema (sistem tercihini ve kullanıcı seçimini hatırlar)
 - Mobil uyumlu, klavye ile gezilebilir, `prefers-reduced-motion` desteği
 - Proje görselleri WebP: toplam boyut yaklaşık 2,2 MB'tan 307 KB'a indi
@@ -39,6 +42,7 @@ src/
     Works.jsx             proje kartları (works dizisi)
     OpenSource.jsx        GitHub repolarının kayan şeridi
     ThemeToggle.jsx       açık/koyu tema düğmesi
+    Reveal.jsx            kaydırınca büyüyerek beliren bölüm sarmalayıcısı
 public/
   works/                  proje kapak görselleri (WebP)
   Gokalp_Vural_CV.pdf     indirilebilir CV
