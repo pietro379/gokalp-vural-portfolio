@@ -1,4 +1,6 @@
-﻿// Proje verileri: Portföy klasöründeki README'lerden alındı
+﻿import { useRef } from 'react'
+
+// Proje verileri: Portföy klasöründeki README'lerden alındı
 const works = [
   {
     title: 'Kart Cüzdanı',
@@ -173,11 +175,36 @@ function CardStackPreview() {
 function Card({ w }) {
   const Tag = w.link ? 'a' : 'div'
   const extra = w.link ? { href: w.link, target: '_blank', rel: 'noreferrer' } : {}
+  const ref = useRef(null)
+
+  // Fare kartın üzerinde gezerken kart imlece doğru hafifçe eğilir, ışık imleci takip eder
+  const handleMove = (e) => {
+    if (e.pointerType !== 'mouse') return
+    const el = ref.current
+    const r = el.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width
+    const y = (e.clientY - r.top) / r.height
+    el.style.setProperty('--ry', `${(x - 0.5) * 10}deg`)
+    el.style.setProperty('--rx', `${(0.5 - y) * 8}deg`)
+    el.style.setProperty('--mx', `${x * 100}%`)
+    el.style.setProperty('--my', `${y * 100}%`)
+  }
+  const handleLeave = () => {
+    const el = ref.current
+    el.style.setProperty('--ry', '0deg')
+    el.style.setProperty('--rx', '0deg')
+  }
+
   return (
     <Tag
       {...extra}
-      className={`group relative block min-h-[26rem] overflow-hidden sm:min-h-64 rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl transition duration-500 hover:z-10 hover:scale-[1.03] hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
+      ref={ref}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      className={`tilt-card group relative block min-h-[26rem] overflow-hidden sm:min-h-64 rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl hover:z-10 hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
     >
+      {/* İmleci takip eden parlama */}
+      <div className="tilt-glow pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       {w.image ? (
         // Geniş kapaklar telefonda yanlardan kırpılır; mobileImage varsa dar ekranda o kullanılır
         <picture>

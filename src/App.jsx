@@ -4,6 +4,7 @@ import About from './components/About.jsx'
 import Works from './components/Works.jsx'
 import OpenSource from './components/OpenSource.jsx'
 import ThemeToggle from './components/ThemeToggle.jsx'
+import Reveal from './components/Reveal.jsx'
 
 function getInitialTheme() {
   try {
@@ -58,9 +59,15 @@ export default function App() {
 
       <main className="relative z-10">
         <Hero />
-        <About />
-        <Works />
-        <OpenSource />
+        <Reveal>
+          <About />
+        </Reveal>
+        <Reveal>
+          <Works />
+        </Reveal>
+        <Reveal>
+          <OpenSource />
+        </Reveal>
       </main>
 
       <footer className="relative z-10 flex flex-col items-center gap-5 px-6 py-10 text-center text-sm text-slate-500 dark:text-slate-400">

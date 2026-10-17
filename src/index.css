@@ -152,3 +152,34 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highl
   opacity: 0.6;
   animation: halo-spin 6s linear infinite;
 }
+
+/* Bölümler ekrana girerken yumuşakça büyüyerek belirir */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px) scale(0.92);
+  transform-origin: 50% 25%;
+  transition: opacity 0.9s ease-out, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-shown { opacity: 1; transform: none; }
+
+/* Ad başlığındaki yavaş renk geçişi */
+@keyframes name-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.name-gradient { animation: name-gradient 14s ease-in-out infinite; }
+
+/* Proje kartları: imlece doğru eğilme ve parlama (yalnızca fare) */
+.tilt-card {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.25s ease-out, box-shadow 0.5s;
+  will-change: transform;
+}
+.tilt-card:hover { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.03); }
+.tilt-glow { background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.28), transparent 55%); mix-blend-mode: soft-light; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .name-gradient { animation: none; }
+  .tilt-card, .tilt-card:hover { transform: none; }
+}

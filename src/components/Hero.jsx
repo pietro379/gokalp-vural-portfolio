@@ -117,9 +117,12 @@ export default function Hero() {
 
       <h1
         style={{ '--i': 1 }}
-        className="rise animate-gradient mt-8 bg-gradient-to-r from-fuchsia-500 via-orange-400 to-cyan-400 bg-[length:200%_200%] bg-clip-text text-5xl font-black leading-tight tracking-tight text-transparent sm:text-8xl md:text-9xl"
+        className="rise mt-8 text-5xl font-black leading-tight tracking-tight sm:text-8xl md:text-9xl"
       >
-        Gökalp Vural
+        {/* Renk geçişi iç öğede: ".rise" animasyonu üst öğedeki animasyonu ezdiği için ayrı tutulur */}
+        <span className="name-gradient bg-gradient-to-r from-fuchsia-500 via-orange-400 via-60% to-cyan-400 bg-[length:300%_100%] bg-clip-text text-transparent">
+          Gökalp Vural
+        </span>
       </h1>
 
       <p style={{ '--i': 2 }} className="rise mt-6 max-w-xl text-lg font-semibold text-slate-600 sm:text-2xl dark:text-slate-300">
