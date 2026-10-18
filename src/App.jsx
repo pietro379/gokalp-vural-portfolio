@@ -4,6 +4,8 @@ import About from './components/About.jsx'
 import Works from './components/Works.jsx'
 import OpenSource from './components/OpenSource.jsx'
 import ThemeToggle from './components/ThemeToggle.jsx'
+import LangToggle from './components/LangToggle.jsx'
+import { LangProvider } from './i18n.jsx'
 import Reveal from './components/Reveal.jsx'
 
 function getInitialTheme() {
@@ -43,6 +45,7 @@ export default function App() {
   }, [theme])
 
   return (
+    <LangProvider>
     <div className="relative min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white">
       {/* Arka plan gradient küreleri */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
@@ -55,6 +58,7 @@ export default function App() {
         ))}
       </div>
 
+      <LangToggle />
       <ThemeToggle theme={theme} onToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
 
       <main className="relative z-10">
@@ -98,6 +102,7 @@ export default function App() {
         <p>© 2026 Gökalp Vural</p>
       </footer>
     </div>
+    </LangProvider>
   )
 }
 

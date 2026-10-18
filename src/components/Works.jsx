@@ -1,11 +1,12 @@
 ﻿import { useRef } from 'react'
+import { useLang } from '../lang.js'
 
 // Proje verileri: Portföy klasöründeki README'lerden alındı
 const works = [
   {
     title: 'Kart Cüzdanı',
     tag: 'Flutter • Dart',
-    text: 'KVKK uyumlu, tamamen çevrimdışı çalışan, verileri cihazda şifreli saklayan kart cüzdanı. PIN kilidi, 3B çevrilen kartlar, kart düzenleme ve silme. Android APK indirilebilir.',
+    text: 'KVKK uyumlu, tamamen çevrimdışı çalışan, verileri cihazda şifreli saklayan kart cüzdanı. PIN kilidi, isteğe bağlı parmak izi, 3B çevrilen kartlar, kart düzenleme ve silme. Android APK indirilebilir.',
     glow: 'hover:shadow-sky-500/50',
     gradient: 'from-sky-500 via-indigo-500 to-violet-600',
     preview: true,
@@ -102,6 +103,59 @@ const works = [
   },
 ]
 
+
+// İngilizce metinler: proje başlığına göre eşlenir; yapı (renk, bağlantı, yerleşim) aynı kalır.
+const enWorks = {
+  'Kart Cüzdanı': {
+    title: 'Card Wallet',
+    text: 'A fully offline, encrypted card wallet that keeps all data on the device and is KVKK (Turkish data protection law) compliant. PIN lock, optional fingerprint unlock, 3D flipping cards, card editing and deletion. Android APK available.',
+  },
+  'Pet Care': {
+    text: 'Health tracking and social network app for pets: vet history, feed and chat, a clinic map with categories, light/dark theme.',
+  },
+  RetroGames: {
+    tag: 'JavaScript • 12 games',
+    text: 'A game portal bringing 12 retro games together, written in plain JavaScript.',
+  },
+  'Add To Cart': {
+    tag: 'Java 17 • Design Patterns',
+    text: 'A shopping cart and invoice app that applies discount rules; web and command line.',
+  },
+  'Image Compressor': {
+    text: 'Compresses JPEG, PNG and WebP images in the browser; no file is ever uploaded to a server.',
+  },
+  'Cozy Focus Timer': {
+    text: 'A cozy focus timer with rain and fireplace sounds and light/dark themes.',
+  },
+  Photobooth: {
+    tag: 'JavaScript • Canvas • 29 cameras',
+    text: 'Make your photo look like it was shot on one of 29 retro cameras and build photo-booth strips and polaroid collages. The flash pops; download as PDF, GIF or PNG.',
+  },
+  tidyfiles: {
+    tag: 'Python • CLI • Unit Tests',
+    text: 'A command-line tool that organizes messy folders by file type and date. Supports dry runs and one-command undo.',
+  },
+  Taskboard: {
+    tag: 'React • Node.js • PostgreSQL • 87 Tests',
+    text: 'Task management for teams: role-based workspaces, a drag-and-drop board, comments and an activity log. Express REST API, JWT, automated tests and CI, live on Vercel. A demo account in the README lets you try it without signing up.',
+  },
+}
+
+const enExtra = {
+  'APK indir': 'Download APK',
+  'Kaynak kod': 'Source code',
+  'Kaynak kod ve demo hesabı': 'Source code & demo account',
+}
+
+function localize(w, lang) {
+  if (lang !== 'en') return w
+  return {
+    ...w,
+    ...enWorks[w.title],
+    extra: w.extra?.map((e) => ({ ...e, label: enExtra[e.label] ?? e.label })),
+  }
+}
+
 // Kart Cüzdanı için CSS ile çizilmiş canlı ön gösterim:
 // kendiliğinden açılıp kapanan kartlar, ışık parlaması, PIN noktaları ve süzülen rozetler
 function MiniCard({ className, anim, last4, brand, shine }) {
@@ -137,6 +191,8 @@ function FloatChip({ className, delay, children }) {
 }
 
 function CardStackPreview() {
+  const { lang } = useLang()
+  const chips = lang === 'en' ? ['🔒 Encrypted', '📴 Offline'] : ['🔒 Şifreli', '📴 Çevrimdışı']
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* nabız gibi atan ışık halkaları */}
@@ -166,8 +222,8 @@ function CardStackPreview() {
         />
       </div>
 
-      <FloatChip className="left-5 top-6" delay="0s">🔒 Şifreli</FloatChip>
-      <FloatChip className="right-5 top-16" delay="1.2s">📴 Çevrimdışı</FloatChip>
+      <FloatChip className="left-5 top-6" delay="0s">{chips[0]}</FloatChip>
+      <FloatChip className="right-5 top-16" delay="1.2s">{chips[1]}</FloatChip>
       <FloatChip className="right-8 top-[58%] hidden sm:block" delay="2.4s">✓ KVKK</FloatChip>
 
       {/* PIN noktaları sırayla dolar */}
@@ -180,7 +236,9 @@ function CardStackPreview() {
   )
 }
 
-function Card({ w }) {
+function Card({ w: base }) {
+  const { lang, t } = useLang()
+  const w = localize(base, lang)
   const ref = useRef(null)
 
   // Fare kartın üzerinde gezerken kart imlece doğru hafifçe eğilir, ışık imleci takip eder
@@ -215,7 +273,7 @@ function Card({ w }) {
           href={w.link}
           target="_blank"
           rel="noreferrer"
-          aria-label={`${w.title} projesini incele`}
+          aria-label={t.viewProject(w.title)}
           className="absolute inset-0 z-30 rounded-3xl"
         />
       )}
@@ -249,7 +307,7 @@ function Card({ w }) {
         </span>
         <p className="mt-2 max-h-0 overflow-hidden text-sm font-medium text-white/90 opacity-0 transition-all duration-500 [@media(hover:none)]:max-h-44 [@media(hover:none)]:opacity-100 group-hover:max-h-44 group-hover:opacity-100 group-focus-within:max-h-44 group-focus-within:opacity-100">
           {w.text}
-          {w.link && <span className="mt-2 block font-bold">İncele ↗</span>}
+          {w.link && <span className="mt-2 block font-bold">{t.view}</span>}
           {w.extra && (
             <span className="mt-2 flex flex-wrap gap-2">
               {w.extra.map((e) => (
@@ -272,15 +330,16 @@ function Card({ w }) {
 }
 
 export default function Works() {
+  const { t } = useLang()
   return (
     <section id="calismalar" className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
       <h2 className="text-center text-4xl font-black tracking-tight sm:text-6xl">
         <span className="text-fuchsia-500 dark:text-fuchsia-400">
-          Seçili Çalışmalarım
+          {t.worksHeading}
         </span>
       </h2>
       <p className="mx-auto mt-4 max-w-xl text-center font-medium text-slate-600 dark:text-slate-300">
-        Detaylar için kartların üzerine gel ya da dokun.
+        {t.worksHint}
       </p>
 
       <div className="mt-10 grid gap-5 sm:auto-rows-[18rem] sm:grid-cols-4">

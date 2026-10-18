@@ -1,4 +1,6 @@
-﻿// Her alanın kendi rengi ve etiketleri var; kartlar yazılım odaklı
+﻿import { useLang } from '../lang.js'
+
+// Her alanın kendi rengi ve etiketleri var; kartlar yazılım odaklı
 const skills = [
   {
     title: 'Mobil',
@@ -32,23 +34,46 @@ const stats = [
   { value: '1', label: 'canlı full-stack uygulama', gradient: 'from-emerald-400 to-cyan-500' },
 ]
 
+const en = {
+  skills: [
+    {
+      title: 'Mobile',
+      text: 'I build fast, smooth and secure Android and iOS apps with Flutter. My offline encrypted card wallet is the best example.',
+    },
+    {
+      title: 'Web',
+      text: 'I built my task management app (Taskboard) with React and Node.js, and design responsive, user-friendly interfaces with HTML, CSS and JavaScript.',
+    },
+    {
+      title: 'Other languages',
+      text: 'I like writing logic that is solid, clean and readable. Solving problems is as fun as a puzzle to me.',
+    },
+    {
+      title: 'Tools',
+      text: 'Version control and my dev environment are part of my daily work: keeping code tidy and tracking changes gives me peace of mind.',
+    },
+  ],
+  stats: ['projects', 'mobile apps', 'live full-stack app'],
+}
+
 export default function About() {
+  const { lang, t } = useLang()
+  const items = skills.map((s, i) => (lang === 'en' ? { ...s, ...en.skills[i] } : s))
+  const statItems = stats.map((st, i) => (lang === 'en' ? { ...st, label: en.stats[i] } : st))
   return (
     <section id="hakkimda" className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
       <h2 className="text-center text-4xl font-black tracking-tight sm:text-6xl">
         <span className="text-cyan-500 dark:text-cyan-400">
-          Hakkımda
+          {t.aboutHeading}
         </span>
       </h2>
 
       <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-slate-600 dark:text-slate-300">
-        Bilgisayar Programcılığı mezunuyum. Flutter ile çevrimdışı çalışan şifreli bir kart
-        cüzdanı, React ve Node.js ile bir görev yönetim uygulaması (Taskboard) yazdım. Temiz kod
-        yazmaya ve arayüzlerin kullanımı kolay, düzenli ve hızlı olmasına özen gösteririm.
+        {t.aboutText}
       </p>
 
       <ul className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
-        {stats.map((st) => (
+        {statItems.map((st) => (
           <li
             key={st.label}
             className="rounded-xl border border-white/50 bg-white/50 px-5 py-4 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
@@ -64,7 +89,7 @@ export default function About() {
       </ul>
 
       <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6">
-        {skills.map((s, i) => (
+        {items.map((s, i) => (
           <article
             key={s.title}
             className="group relative overflow-hidden rounded-2xl border border-white/50 bg-white/50 p-6 shadow-lg backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-7 dark:border-white/10 dark:bg-white/5"

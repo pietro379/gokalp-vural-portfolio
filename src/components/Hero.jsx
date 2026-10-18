@@ -1,15 +1,18 @@
 ﻿import { useEffect, useState } from 'react'
+import { useLang } from '../lang.js'
 
 // Kod penceresinin içeriği: her satır renkli parçalardan oluşur.
 // k: anahtar kelime, p: özellik adı, s: metin, b: değer, d: sade yazı
-const lines = [
-  [['k', 'const '], ['p', 'gokalp'], ['d', ' = {']],
-  [['d', '  '], ['p', 'rol'], ['d', ': '], ['s', "'Junior yazılım geliştirici'"], ['d', ',']],
-  [['d', '  '], ['p', 'sehir'], ['d', ': '], ['s', "'Ankara'"], ['d', ',']],
-  [['d', '  '], ['p', 'teknoloji'], ['d', ': ['], ['s', "'Flutter'"], ['d', ', '], ['s', "'React'"], ['d', ', '], ['s', "'Node.js'"], ['d', '],']],
-  [['d', '  '], ['p', 'projeler'], ['d', ': '], ['b', '9'], ['d', ',']],
-  [['d', '}']],
-]
+function getLines({ codeKeys, roleValue }) {
+  return [
+    [['k', 'const '], ['p', 'gokalp'], ['d', ' = {']],
+    [['d', '  '], ['p', codeKeys.role], ['d', ': '], ['s', roleValue], ['d', ',']],
+    [['d', '  '], ['p', codeKeys.city], ['d', ': '], ['s', "'Ankara'"], ['d', ',']],
+    [['d', '  '], ['p', codeKeys.tech], ['d', ': ['], ['s', "'Flutter'"], ['d', ', '], ['s', "'React'"], ['d', ', '], ['s', "'Node.js'"], ['d', '],']],
+    [['d', '  '], ['p', codeKeys.projects], ['d', ': '], ['b', '9'], ['d', ',']],
+    [['d', '}']],
+  ]
+}
 
 const tokenColor = {
   k: 'text-fuchsia-400',
@@ -19,7 +22,7 @@ const tokenColor = {
   d: 'text-slate-400',
 }
 
-const totalChars = lines.flat().reduce((sum, [, text]) => sum + text.length, 0)
+const countChars = (lines) => lines.flat().reduce((sum, [, text]) => sum + text.length, 0)
 
 // Harf harf yazılma: hareketi azaltmayı seçenlerde metin baştan tam görünür
 function useTyping(total) {
@@ -36,7 +39,7 @@ function useTyping(total) {
   return count
 }
 
-function CodeLines({ visible }) {
+function CodeLines({ visible, lines }) {
   let remaining = visible
   return lines.map((line, i) => {
     const parts = line.map(([type, text], j) => {
@@ -68,6 +71,9 @@ function Chip({ className, delay, children }) {
 }
 
 function CodeWindow() {
+  const { t } = useLang()
+  const lines = getLines(t)
+  const totalChars = countChars(lines)
   const visible = useTyping(totalChars)
   const done = visible >= totalChars
 
@@ -86,13 +92,13 @@ function CodeWindow() {
 
         <pre className="min-h-[11.5rem] overflow-hidden px-5 py-5 font-mono text-[12px] leading-[1.6] sm:text-[13.5px]">
           <code>
-            <CodeLines visible={visible} />
+            <CodeLines visible={visible} lines={lines} />
           </code>
         </pre>
 
         <div className="flex items-center gap-2 border-t border-white/10 px-4 py-2.5 font-mono text-xs text-slate-400">
           <span className={`h-2 w-2 rounded-full bg-[#28c840] ${done ? 'animate-pulse' : 'opacity-40'}`} />
-          {done ? 'Derleme başarılı' : 'yazılıyor…'}
+          {done ? t.buildOk : t.typing}
           <span className={`ml-auto inline-block h-4 w-[2px] bg-fuchsia-400 ${done ? 'animate-blink' : ''}`} />
         </div>
       </div>
@@ -105,6 +111,7 @@ function CodeWindow() {
 }
 
 export default function Hero() {
+  const { t } = useLang()
   return (
     <section className="flex min-h-svh flex-col items-center justify-center px-6 py-24 text-center">
       <div
@@ -112,7 +119,7 @@ export default function Hero() {
         className="rise rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-semibold shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-white/10"
       >
         <span className="mr-2">👋</span>
-        Merhaba
+        {t.hello}
       </div>
 
       <h1
@@ -126,10 +133,10 @@ export default function Hero() {
       </h1>
 
       <p style={{ '--i': 2 }} className="rise mt-6 max-w-xl text-lg font-semibold text-slate-600 sm:text-2xl dark:text-slate-300">
-        Ankara'da junior yazılım geliştirici.
+        {t.heroRole}
       </p>
       <p style={{ '--i': 3 }} className="rise mt-3 max-w-xl text-base font-medium text-slate-500 sm:text-lg dark:text-slate-400">
-        Flutter, React ve Node.js ile uygulamalar geliştiriyorum. Staj ve junior pozisyonlara açığım.
+        {t.heroText}
       </p>
 
       <div style={{ '--i': 4 }} className="rise mt-10 flex flex-wrap justify-center gap-4">
@@ -138,13 +145,13 @@ export default function Hero() {
           download
           className="rounded-full bg-gradient-to-r from-fuchsia-500 to-orange-400 px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-fuchsia-500/30 transition hover:scale-105 active:scale-95"
         >
-          CV'yi indir ↓
+          {t.downloadCv}
         </a>
         <a
           href="#hakkimda"
           className="rounded-full border border-white/50 bg-white/50 px-8 py-4 text-lg font-extrabold text-slate-800 shadow-xl backdrop-blur-xl transition hover:scale-105 active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white"
         >
-          Beni Tanı
+          {t.aboutMe}
         </a>
       </div>
 

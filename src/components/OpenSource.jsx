@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLang } from '../lang.js'
 
 const USERNAME = 'pietro379'
 const ROW_COUNT = 3
@@ -31,6 +32,7 @@ const langColors = {
 const fallbackColor = '#94a3b8'
 
 function RepoCard({ repo, hidden = false }) {
+  const { t } = useLang()
   const color = langColors[repo.language] ?? fallbackColor
   return (
     <a
@@ -53,11 +55,11 @@ function RepoCard({ repo, hidden = false }) {
       />
       <h3 className="truncate pr-8 text-xl font-extrabold">{repo.name}</h3>
       <p className="mt-3 line-clamp-3 flex-1 text-sm font-medium leading-relaxed text-slate-600 dark:text-slate-300">
-        {repo.description || 'Açıklama eklenmemiş.'}
+        {repo.description || t.noDescription}
       </p>
       <div className="mt-4 flex items-center justify-between text-sm font-bold">
         <span style={{ color }}>
-          {repo.language ?? 'Diğer'}
+          {repo.language ?? t.otherLanguage}
           {repo.fork && <span className="ml-2 text-xs text-slate-500 dark:text-slate-400">fork</span>}
         </span>
         <span className="text-slate-500 opacity-0 transition group-hover:opacity-100 dark:text-slate-400 [@media(hover:none)]:opacity-100">
@@ -69,6 +71,7 @@ function RepoCard({ repo, hidden = false }) {
 }
 
 export default function OpenSource() {
+  const { t } = useLang()
   const [repos, setRepos] = useState(null)
   const [error, setError] = useState(false)
 
@@ -101,16 +104,16 @@ export default function OpenSource() {
     <section id="acik-kaynak" className="overflow-hidden py-16 sm:py-24">
       <h2 className="px-6 text-center text-4xl font-black tracking-tight sm:text-6xl">
         <span className="text-emerald-500 dark:text-emerald-400">
-          Açık Kaynak Projelerim
+          {t.openSourceHeading}
         </span>
       </h2>
       <p className="mx-auto mt-4 max-w-xl px-6 text-center font-medium text-slate-600 dark:text-slate-300">
-        GitHub profilimdeki tüm repolar canlı çekiliyor. Üzerine gelince akış durur, tıklayınca repoya gidersin.
+        {t.openSourceHint}
       </p>
 
       {error && (
         <p className="mt-12 px-6 text-center font-semibold text-rose-500">
-          Repolar şu an yüklenemedi (GitHub API sınırı olabilir). Biraz sonra tekrar dene.
+          {t.openSourceError}
         </p>
       )}
 
