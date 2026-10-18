@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from 'react'
 import { useLang } from '../lang.js'
+import CvMenu from './CvMenu.jsx'
 
 // Kod penceresinin içeriği: her satır renkli parçalardan oluşur.
 // k: anahtar kelime, p: özellik adı, s: metin, b: değer, d: sade yazı
@@ -139,14 +140,8 @@ export default function Hero() {
         {t.heroText}
       </p>
 
-      <div style={{ '--i': 4 }} className="rise mt-10 flex flex-wrap justify-center gap-4">
-        <a
-          href={t.cvFile}
-          download
-          className="rounded-full bg-gradient-to-r from-fuchsia-500 to-orange-400 px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-fuchsia-500/30 transition hover:scale-105 active:scale-95"
-        >
-          {t.downloadCv}
-        </a>
+      <div style={{ '--i': 4 }} className="rise relative z-20 mt-10 flex flex-wrap justify-center gap-4">
+        <CvMenu />
         <a
           href="#hakkimda"
           className="rounded-full border border-white/50 bg-white/50 px-8 py-4 text-lg font-extrabold text-slate-800 shadow-xl backdrop-blur-xl transition hover:scale-105 active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white"
