@@ -21,6 +21,7 @@ const works = [
     gradient: 'from-indigo-500 via-violet-500 to-fuchsia-500',
     image: '/works/pet-care.webp',
     link: 'https://github.com/pietro379/pet-care-app',
+    extra: [{ label: 'APK indir', href: 'https://github.com/pietro379/pet-care-app/releases/latest' }],
     span: 'sm:col-span-2 sm:row-span-2',
   },
   {
