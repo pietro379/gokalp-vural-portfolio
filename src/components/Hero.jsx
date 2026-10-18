@@ -141,7 +141,7 @@ export default function Hero() {
 
       <div style={{ '--i': 4 }} className="rise mt-10 flex flex-wrap justify-center gap-4">
         <a
-          href="/Gokalp_Vural_CV.pdf"
+          href={t.cvFile}
           download
           className="rounded-full bg-gradient-to-r from-fuchsia-500 to-orange-400 px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-fuchsia-500/30 transition hover:scale-105 active:scale-95"
         >
