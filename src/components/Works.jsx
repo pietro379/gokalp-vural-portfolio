@@ -5,11 +5,12 @@ const works = [
   {
     title: 'Kart Cüzdanı',
     tag: 'Flutter • Dart',
-    text: 'KVKK uyumlu, tamamen çevrimdışı çalışan, verileri cihazda şifreli saklayan kart cüzdanı. PIN kilidi ve 3B çevrilen kartlar.',
+    text: 'KVKK uyumlu, tamamen çevrimdışı çalışan, verileri cihazda şifreli saklayan kart cüzdanı. PIN kilidi, 3B çevrilen kartlar, kart düzenleme ve silme. Android APK indirilebilir.',
     glow: 'hover:shadow-sky-500/50',
     gradient: 'from-sky-500 via-indigo-500 to-violet-600',
     preview: true,
     link: 'https://github.com/pietro379/kart-cuzdani',
+    extra: [{ label: 'APK indir', href: 'https://github.com/pietro379/kart-cuzdani/releases/latest' }],
     span: 'sm:col-span-2 sm:row-span-2',
   },
   {
@@ -30,6 +31,7 @@ const works = [
     gradient: 'from-fuchsia-500 to-rose-500',
     image: '/works/retrogames.webp',
     link: 'https://pietro379.github.io/game-website/',
+    extra: [{ label: 'Kaynak kod', href: 'https://github.com/pietro379/game-website' }],
     span: 'sm:col-span-2',
   },
   {
@@ -40,6 +42,7 @@ const works = [
     gradient: 'from-orange-400 to-amber-500',
     image: '/works/add-to-cart.webp',
     link: 'https://pietro379.github.io/add-to-cart-project/',
+    extra: [{ label: 'Kaynak kod', href: 'https://github.com/pietro379/add-to-cart-project' }],
   },
   {
     title: 'Image Compressor',
@@ -49,6 +52,7 @@ const works = [
     gradient: 'from-emerald-400 to-cyan-500',
     image: '/works/image-compressor.webp',
     link: 'https://pietro379.github.io/image-compressor/',
+    extra: [{ label: 'Kaynak kod', href: 'https://github.com/pietro379/image-compressor' }],
   },
   {
     title: 'Cozy Focus Timer',
@@ -58,6 +62,7 @@ const works = [
     gradient: 'from-amber-400 to-orange-600',
     image: '/works/odaklanma.webp',
     link: 'https://pietro379.github.io/cozy-focus-timer/',
+    extra: [{ label: 'Kaynak kod', href: 'https://github.com/pietro379/cozy-focus-timer' }],
     span: 'sm:col-span-2',
   },
   {
@@ -68,6 +73,7 @@ const works = [
     gradient: 'from-rose-500 to-red-600',
     image: '/works/photobooth.webp',
     link: 'https://pietro379.github.io/retro-photo-booth/',
+    extra: [{ label: 'Kaynak kod', href: 'https://github.com/pietro379/retro-photo-booth' }],
     span: 'sm:col-span-2',
   },
   {
@@ -83,13 +89,14 @@ const works = [
   },
   {
     title: 'Taskboard',
-    tag: 'React • Node.js • PostgreSQL • 32 Test',
-    text: 'Takımlar için görev yönetimi: rollü çalışma alanları, sürükle-bırak pano, yorumlar ve etkinlik geçmişi. Express REST API, JWT, otomatik testler ve CI ile Vercel üzerinde yayında.',
+    tag: 'React • Node.js • PostgreSQL • 87 Test',
+    text: 'Takımlar için görev yönetimi: rollü çalışma alanları, sürükle-bırak pano, yorumlar ve etkinlik geçmişi. Express REST API, JWT, otomatik testler ve CI ile Vercel üzerinde yayında. Kayıtsız denemek için README’deki demo hesabı kullanılabilir.',
     glow: 'hover:shadow-indigo-500/50',
     gradient: 'from-indigo-500 to-sky-500',
     image: '/works/taskboard.webp',
     lightCover: true,
     link: 'https://taskboard-app-red.vercel.app',
+    extra: [{ label: 'Kaynak kod ve demo hesabı', href: 'https://github.com/pietro379/taskboard#readme' }],
     span: 'sm:col-span-4',
   },
 ]
@@ -160,7 +167,7 @@ function CardStackPreview() {
 
       <FloatChip className="left-5 top-6" delay="0s">🔒 Şifreli</FloatChip>
       <FloatChip className="right-5 top-16" delay="1.2s">📴 Çevrimdışı</FloatChip>
-      <FloatChip className="right-8 top-[58%]" delay="2.4s">✓ KVKK</FloatChip>
+      <FloatChip className="right-8 top-[58%] hidden sm:block" delay="2.4s">✓ KVKK</FloatChip>
 
       {/* PIN noktaları sırayla dolar */}
       <div className="absolute left-6 top-[62%] hidden items-center sm:flex gap-1.5 rounded-full bg-black/30 px-3 py-2 backdrop-blur-md">
@@ -173,8 +180,6 @@ function CardStackPreview() {
 }
 
 function Card({ w }) {
-  const Tag = w.link ? 'a' : 'div'
-  const extra = w.link ? { href: w.link, target: '_blank', rel: 'noreferrer' } : {}
   const ref = useRef(null)
 
   // Fare kartın üzerinde gezerken kart imlece doğru hafifçe eğilir, ışık imleci takip eder
@@ -196,13 +201,23 @@ function Card({ w }) {
   }
 
   return (
-    <Tag
-      {...extra}
+    <div
       ref={ref}
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
-      className={`tilt-card group relative block min-h-[26rem] overflow-hidden sm:min-h-64 rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl hover:z-10 hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
+      className={`tilt-card group relative min-h-[26rem] overflow-hidden sm:min-h-64 rounded-3xl border border-white/50 bg-white/40 shadow-xl backdrop-blur-xl hover:z-10 hover:shadow-2xl dark:border-white/10 dark:bg-white/5 ${w.glow} ${w.span ?? ''}`}
     >
+      {/* Kartın tamamı ana bağlantıdır; ikinci bağlantılar (kaynak kod, APK) bunun üstünde durur,
+          böylece iç içe bağlantı oluşmaz. */}
+      {w.link && (
+        <a
+          href={w.link}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${w.title} projesini incele`}
+          className="absolute inset-0 z-30 rounded-3xl"
+        />
+      )}
       {/* İmleci takip eden parlama */}
       <div className="tilt-glow pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       {w.image ? (
@@ -226,17 +241,32 @@ function Card({ w }) {
       {/* Açık renkli kapaklarda başlığın okunması için örtü daha koyu tutulur */}
       <div className={`absolute inset-0 bg-gradient-to-t ${w.lightCover ? 'from-black/95 via-black/60 to-black/10' : 'from-black/85 via-black/30 to-transparent'}`} />
 
-      <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 p-6 text-white">
         <h3 className="text-2xl font-black sm:text-3xl">{w.title}</h3>
         <span className={`mt-2 inline-block rounded-full bg-gradient-to-r ${w.gradient} px-3 py-1 text-xs font-bold`}>
           {w.tag}
         </span>
-        <p className="mt-2 max-h-0 overflow-hidden text-sm font-medium text-white/90 opacity-0 transition-all duration-500 [@media(hover:none)]:max-h-32 [@media(hover:none)]:opacity-100 group-hover:max-h-32 group-hover:opacity-100">
+        <p className="mt-2 max-h-0 overflow-hidden text-sm font-medium text-white/90 opacity-0 transition-all duration-500 [@media(hover:none)]:max-h-44 [@media(hover:none)]:opacity-100 group-hover:max-h-44 group-hover:opacity-100 group-focus-within:max-h-44 group-focus-within:opacity-100">
           {w.text}
           {w.link && <span className="mt-2 block font-bold">İncele ↗</span>}
+          {w.extra && (
+            <span className="mt-2 flex flex-wrap gap-2">
+              {w.extra.map((e) => (
+                <a
+                  key={e.href}
+                  href={e.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pointer-events-auto rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur-md transition hover:bg-white/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                >
+                  {e.label} ↗
+                </a>
+              ))}
+            </span>
+          )}
         </p>
       </div>
-    </Tag>
+    </div>
   )
 }
 
