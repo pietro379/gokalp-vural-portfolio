@@ -91,7 +91,7 @@ const works = [
   },
   {
     title: 'Taskboard',
-    tag: 'React • Node.js • PostgreSQL • 87 Test',
+    tag: 'React • Node.js • PostgreSQL • 102 Test',
     text: 'Takımlar için görev yönetimi: rollü çalışma alanları, sürükle-bırak pano, yorumlar ve etkinlik geçmişi. Express REST API, JWT, otomatik testler ve CI ile Vercel üzerinde yayında. Kayıtsız denemek için README’deki demo hesabı kullanılabilir.',
     glow: 'hover:shadow-indigo-500/50',
     gradient: 'from-indigo-500 to-sky-500',
@@ -136,7 +136,7 @@ const enWorks = {
     text: 'A command-line tool that organizes messy folders by file type and date. Supports dry runs and one-command undo.',
   },
   Taskboard: {
-    tag: 'React • Node.js • PostgreSQL • 87 Tests',
+    tag: 'React • Node.js • PostgreSQL • 102 Tests',
     text: 'Task management for teams: role-based workspaces, a drag-and-drop board, comments and an activity log. Express REST API, JWT, automated tests and CI, live on Vercel. A demo account in the README lets you try it without signing up.',
   },
 }
